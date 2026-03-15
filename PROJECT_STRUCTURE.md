@@ -1,3 +1,9 @@
+git add .
+git commit -m "我的描述"
+git config --global --unset http.proxy
+git push -u origin main --force
+
+
 # 面向专业认证的本科培养方案智能设计系统 - 项目目录结构建议
 
 该目录结构基于 **Django + Vue3 (Vite)** 技术栈设计，专为支持 OBE 认证逻辑与图形化编排功能优化。

@@ -5,3 +5,5 @@ pandas
 numpy
 openpyxl
 tqdm
+django-cors-headers
+pdfplumber

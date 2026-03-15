@@ -5,11 +5,17 @@ from django.db.models import Sum
 from decimal import Decimal
 
 class Major(models.Model):
-    """
-    Major
-    """
-    name = models.CharField(max_length=100, verbose_name="Major Name")
-    code = models.CharField(max_length=20, unique=True, verbose_name="Major Code")
+    name = models.CharField(max_length=100, verbose_name="专业名称")
+    code = models.CharField(max_length=20, unique=True, verbose_name="专业代码")
+    
+    # --- 新增的文本信息字段 ---
+    duration = models.CharField(max_length=50, verbose_name="学制", null=True, blank=True)
+    degree = models.CharField(max_length=50, verbose_name="学位", null=True, blank=True)
+    core_disciplines = models.TextField(verbose_name="主干学科", null=True, blank=True)
+    core_courses_text = models.TextField(verbose_name="主干课程文本", null=True, blank=True)
+    graduation_condition = models.TextField(verbose_name="毕业条件", null=True, blank=True)
+    degree_condition = models.TextField(verbose_name="学士学位授予条件", null=True, blank=True)
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

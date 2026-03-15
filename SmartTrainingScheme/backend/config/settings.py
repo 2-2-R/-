@@ -63,11 +63,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database
+# 修改 backend/config/settings.py 中的 DATABASES 字典
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dachuang',  # 刚才创建的数据库名
+        'USER': 'root',    # 你的 MySQL 用户名
+        'PASSWORD': 'wxr213312',   # 你的 MySQL 密码
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 

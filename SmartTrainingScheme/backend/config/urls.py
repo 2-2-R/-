@@ -1,8 +1,8 @@
+# 后端主目录下的 urls.py
 from django.contrib import admin
-from django.urls import path, include # 增加 include
+from django.urls import path, include # 👈 确保导入了 include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # 将 api 开头的请求全部转发给 api 文件夹下的 urls.py 处理
-    path('api/', include('api.urls')), 
+    path('api/', include('core.urls')), # 👈 新增这一行：所有 /api/ 开头的请求都交给 core 处理
 ]

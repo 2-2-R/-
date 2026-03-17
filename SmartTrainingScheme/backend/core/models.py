@@ -3,6 +3,8 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.db.models import Sum
 from decimal import Decimal
+from django.conf import settings # 引入用户模型
+from django.utils import timezone
 
 class Major(models.Model):
     name = models.CharField(max_length=100, verbose_name="专业名称")
@@ -163,3 +165,26 @@ class CourseSupport(models.Model):
 
     def __str__(self):
         return f"{self.course.name} -> {self.indicator} (Weight: {self.weight})"
+
+class AuditLog(models.Model):
+    # 谁操作的
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
+    # 操作了哪个模型（比如 Course, CourseSupport）
+    model_name = models.CharField(max_length=100)
+    # 具体操作类型：新增、修改、删除
+    action = models.CharField(max_length=20)
+    # 对象的 ID 或 名称，方便追溯
+    object_id = models.CharField(max_length=50)
+    object_repr = models.CharField(max_length=255)
+    # 修改的具体内容（可以存 JSON 字符串）
+    changes = models.TextField(blank=True)
+    # 修改时间
+    timestamp = models.DateTimeField(default=timezone.now)
+    # 版本号（第几版）
+    version = models.IntegerField(default=1)
+
+    class Meta:
+        ordering = ['-timestamp'] # 最新的记录排在最前面
+
+    def __str__(self):
+        return f"{self.user} {self.action} {self.model_name} at {self.timestamp}"

@@ -25,9 +25,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'corsheaders',
-    'core',
+    'import_export',
+    'rest_framework',
+    'core.apps.CoreConfig',
     'api',
 ]
 
@@ -41,6 +42,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.AuditMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
